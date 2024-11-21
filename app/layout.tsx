@@ -1,0 +1,62 @@
+import type { Metadata } from "next";
+import localFont from "next/font/local";
+import "./globals.css";
+import Header from "./components/Header";
+
+const geistSans = localFont({
+  src: "./fonts/GeistVF.woff",
+  variable: "--font-geist-sans",
+  weight: "100 900",
+});
+const geistMono = localFont({
+  src: "./fonts/GeistMonoVF.woff",
+  variable: "--font-geist-mono",
+  weight: "100 900",
+});
+
+export const metadata: Metadata = {
+  title: "Tanner Hornsby",
+  description: "adventure is in front of you",
+};
+
+export default function RootLayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
+  if (typeof window !== 'undefined') {
+    let lastScroll = 0;
+    
+    window.addEventListener('scroll', () => {
+      const currentScroll = window.pageYOffset;
+      const header = document.documentElement;
+      
+      if (currentScroll <= 0) {
+        header.style.setProperty('--header-translate', '0');
+      }
+      
+      if (currentScroll > lastScroll && currentScroll > 100) {
+        header.style.setProperty('--header-translate', '-100%');
+      }
+      
+      if (currentScroll < lastScroll) {
+        header.style.setProperty('--header-translate', '0');
+      }
+      
+      lastScroll = currentScroll;
+    });
+  }
+
+  return (
+    <html lang="en">
+      <body
+        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-tan text-gray-800 p-8`}
+      >
+        <Header />
+        <main className=" min-h-screen font-sans text-left max-w-3xl mx-auto">
+        {children}
+        </main>
+      </body>
+    </html>
+  );
+}

@@ -1,0 +1,65 @@
+{
+    "education": [
+      {
+        "school": "University of Chicago",
+        "degree": "B.S. Computer Science",
+        "date": "2020 - 2024",
+        "details": "Focused on systems programming and machine learning. Coursework includes Operating Systems, Parallel Computing, and Machine Learning. Research assistant in the Systems Group working on optimizing distributed systems."
+      }
+    ],
+    "work": [
+      {
+        "company": "Edovo",
+        "role": "Software Engineer",
+        "date": "2023",
+        "description": "Built educational software for incarcerated individuals, focusing on offline-first architecture and secure content delivery. Implemented a custom caching system that reduced data usage by 40%."
+      },
+      {
+        "company": "Data for Common Good",
+        "role": "Data Scientist",
+        "date": "2022",
+        "description": "Led environmental data analysis projects that directly influenced policy decisions. Created predictive models for air quality assessment using historical sensor data and weather patterns."
+      },
+      {
+        "company": "Hohonu",
+        "role": "Software Engineer Intern",
+        "date": "2022",
+        "description": "Developed real-time water level monitoring systems using IoT sensors. Built data pipelines that processed readings from over 1000 sensors, providing crucial environmental insights."
+      }
+    ],
+    "projects": [
+      {
+        "name": "Ouradio",
+        "date": "2023 - Present",
+        "description": "A collaborative radio platform that enables shared music experiences. Built with Next.js and WebRTC, featuring real-time synchronization and social features that create a unique listening experience.",
+        "tech": ["Next.js", "WebRTC", "TypeScript", "TailwindCSS"]
+      },
+      {
+        "name": "Distributed Cache System",
+        "date": "2023",
+        "description": "Built a distributed caching system supporting multiple consistency models. Implemented leader election, conflict resolution, and partition tolerance.",
+        "tech": ["Rust", "gRPC", "Redis", "Docker"]
+      },
+      {
+        "name": "Neural Audio Synthesis",
+        "date": "2022",
+        "description": "Developed a deep learning model for generating musical instruments using adversarial networks. Created a web interface for real-time sound synthesis.",
+        "tech": ["Python", "PyTorch", "React", "Web Audio API"]
+      },
+      {
+        "name": "Environmental Sensor Network",
+        "date": "2022",
+        "description": "Designed and implemented a low-power sensor network for environmental monitoring. Created visualization tools for real-time data analysis.",
+        "tech": ["C++", "LoRaWAN", "PostgreSQL", "Grafana"]
+      }
+    ],
+    "skills": {
+      "languages": ["TypeScript", "Python", "Rust", "C++", "SQL", "Go"],
+      "frontend": ["React", "Next.js", "TailwindCSS", "Three.js", "WebGL"],
+      "backend": ["Node.js", "Django", "FastAPI", "gRPC", "GraphQL"],
+      "databases": ["PostgreSQL", "MongoDB", "Redis", "Cassandra"],
+      "cloud": ["AWS", "GCP", "Docker", "Kubernetes", "Terraform"],
+      "ml": ["PyTorch", "TensorFlow", "scikit-learn", "NumPy", "Pandas"],
+      "tools": ["Git", "Linux", "Vim", "VSCode", "Postman"]
+    }
+}
