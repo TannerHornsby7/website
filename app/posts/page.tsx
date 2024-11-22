@@ -7,15 +7,21 @@ export default function PostsPage() {
 
   if (isLoading) return <Loader />;
   if (error) return <div>Error loading posts</div>;
+  if (!posts?.data) return <div>No posts found</div>;
 
   // Sort posts by date and group them by month+year
-  const sortedPosts = posts?.data.sort((a, b) => {
-    const dateA = a.createdAt ? new Date(a.createdAt).getTime() : 0;
-    const dateB = b.createdAt ? new Date(b.createdAt).getTime() : 0;
-    return dateB - dateA;
+  const sortedPosts = [...posts.data].sort((a, b) => {
+    // Handle cases where createdAt might be null/undefined
+    if (!a || !b) return 0;
+    if (!a.createdAt && !b.createdAt) return 0;
+    if (!a.createdAt) return 1;
+    if (!b.createdAt) return -1;
+    
+    return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
   });
 
-  const groupedPosts = sortedPosts?.reduce((groups: Record<string, any[]>, post) => {
+  const groupedPosts = sortedPosts.reduce((groups: Record<string, any[]>, post) => {
+    if (!post) return groups;
     const monthYear = post.createdAt 
       ? new Date(post.createdAt).toLocaleDateString('en-US', {
           month: 'long',
@@ -34,7 +40,7 @@ export default function PostsPage() {
     <div className="text-left">
       <h1 className="text-4xl font-bold text-gray-900 sticky top-0 z-10">My Posts</h1>
       <div className="mt-8">
-        {Object.entries(groupedPosts || {}).map(([monthYear, posts]) => (
+        {Object.entries(groupedPosts).map(([monthYear, posts]) => (
           <section key={monthYear} className="mb-12">
             <h2 className="sticky top-16 text-sm text-gray-500 mb-6 w-full backdrop-blur">{monthYear}</h2>
             <ul className="space-y-8">

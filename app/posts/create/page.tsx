@@ -10,8 +10,7 @@ export default function CreatePostPage() {
   const [formData, setFormData] = useState({
     title: '',
     content: '',
-    images: {} as Record<string, string>,
-    createdAt: new Date().toISOString().split('T')[0] // Default to today
+    images: {} as Record<string, string>
   });
   const [imageTitle, setImageTitle] = useState('');
   const [imageUrl, setImageUrl] = useState('');
@@ -69,20 +68,6 @@ export default function CreatePostPage() {
             value={formData.content}
             onChange={(e) => setFormData({ ...formData, content: e.target.value })}
             rows={10}
-            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
-            required
-          />
-        </div>
-
-        <div>
-          <label htmlFor="createdAt" className="block text-sm font-medium text-gray-700">
-            Date
-          </label>
-          <input
-            type="date"
-            id="createdAt"
-            value={formData.createdAt}
-            onChange={(e) => setFormData({ ...formData, createdAt: e.target.value })}
             className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
             required
           />

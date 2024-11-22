@@ -17,7 +17,6 @@ const schema = a.schema({
       title: a.string(),
       content: a.string(),
       images: a.json(),
-      createdAt: a.date(),
     })
     .authorization(
       (allow) => [allow.guest()]
