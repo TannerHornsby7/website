@@ -1,5 +1,9 @@
 'use client';
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { Amplify } from "aws-amplify"
+import outputs from "@/amplify_outputs.json"
+
+Amplify.configure(outputs)
 
 const queryClient = new QueryClient();
 

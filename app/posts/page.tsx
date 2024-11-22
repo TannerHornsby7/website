@@ -1,6 +1,5 @@
 'use client';
-
-import { useQuery } from "@tanstack/react-query";
+import { usePosts } from '@/hooks/blog';
 
 const mockPosts = [
   {
@@ -33,13 +32,9 @@ const mockPosts = [
 ];
 
 export default function PostsPage() {
-  const { data: posts, isLoading, error } = useQuery({
-    queryKey: ['posts'],
-    queryFn: async () => {
-      // In production, this would be a real API call
-      return mockPosts;
-    }
-  });
+  const { data: posts, isLoading, error } = usePosts();
+
+  console.log(posts);
 
   if (isLoading) return <div>Loading...</div>;
   if (error) return <div>Error loading posts</div>;
@@ -48,14 +43,14 @@ export default function PostsPage() {
     <div className="text-left">
       <h1 className="text-4xl font-bold text-gray-900">My Posts</h1>
       <ul className="mt-8 space-y-6">
-        {posts.map((post, index) => (
+        {posts?.data.map((post, index) => (
           <li key={index} className="border-b pb-4">
             <h3 className="font-bold text-xl">{post.title}</h3>
             <p className="text-sm text-gray-600 mt-1">
               {new Date(post.createdAt).toLocaleDateString()}
             </p>
             <p className="mt-2">
-              {post.content.split(' ').slice(0, 30).join(' ')}...
+              {post.content?.split(' ').slice(0, 30).join(' ')}...
             </p>
             {/* {Object.entries(post.images)[0] && (
               <div className="mt-4 relative h-48 w-full">

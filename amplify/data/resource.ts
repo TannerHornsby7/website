@@ -14,7 +14,6 @@ const schema = a.schema({
 
   Post: a
     .model({
-      id: a.string(),
       title: a.string(),
       content: a.string(),
       images: a.json(),
@@ -29,6 +28,6 @@ export type Schema = ClientSchema<typeof schema>;
 export const data = defineData({
   schema,
   authorizationModes: {
-    defaultAuthorizationMode: 'iam',
+    defaultAuthorizationMode: 'identityPool',
   },
 });

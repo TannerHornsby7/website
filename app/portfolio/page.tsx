@@ -4,16 +4,6 @@ import { useEffect, useState } from "react";
 import portfolioData from "@/data/portfolio.json";
 import { motion } from "framer-motion";
 
-// backend data (non-secrets)
-import type { Schema } from "@/amplify/data/resource"
-import { Amplify } from "aws-amplify"
-import { generateClient } from "aws-amplify/api"
-import outputs from "@/amplify_outputs.json"
-
-Amplify.configure(outputs)
-
-const client = generateClient<Schema>()
-
 const sections = ['education', 'work', 'projects', 'skills'];
 
 function FloatingNav() {
@@ -61,7 +51,6 @@ function FloatingNav() {
 }
 
 export default function Portfolio() {
-  const [response, setResponse] = useState<Schema['socialToBlog']['returnType']>(null);
   useEffect(() => {
     // Handle initial hash on load
     const hash = window.location.hash.slice(1);
@@ -89,15 +78,7 @@ export default function Portfolio() {
       const element = document.getElementById(section);
       if (element) observer.observe(element);
     });
-
-    client.queries.socialToBlog({
-      name: "Amplify",
-    }).then((res) => {
-      setResponse(res.data);
-      }).catch((err) => {
-        console.error(err)
-        });
-
+    
     return () => observer.disconnect();
   }, []);
 
@@ -155,7 +136,6 @@ export default function Portfolio() {
               </div>
             ))}
           </div>
-          <p> response: {response} </p>
         </section>
       </main>
     </div>
