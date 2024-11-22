@@ -23,7 +23,6 @@ export default function CreatePostPage() {
         images: JSON.stringify(formData.images)
       };
       const post = await createPost(postData);
-      console.log(post);
       router.push('/posts');
     } catch (error) {
       console.error('Error creating post:', error);

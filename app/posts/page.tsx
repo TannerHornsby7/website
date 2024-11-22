@@ -1,5 +1,6 @@
 'use client';
 import { usePosts } from '@/hooks/blog';
+import Infinity from '@/app/components/Loader';
 
 const mockPosts = [
   {
@@ -36,7 +37,7 @@ export default function PostsPage() {
 
   console.log(posts);
 
-  if (isLoading) return <div>Loading...</div>;
+  if (isLoading) return <Infinity />;
   if (error) return <div>Error loading posts</div>;
 
   return (
