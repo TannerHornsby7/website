@@ -1,93 +1,68 @@
 'use client';
 
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import portfolioData from "@/data/portfolio.json";
-import { motion } from "framer-motion";
-
+import FloatingNav from "@/app/components/FloatingNav";
 const sections = ['education', 'work', 'projects', 'skills'];
 
-function FloatingNav() {
-  const [isVisible, setIsVisible] = useState(false);
-  const [activeSection, setActiveSection] = useState(window.location.href.slice(window.location.href.indexOf('#') + 1));
+
+function setUpSectionObserver() {
+  let lastSection = '';
   
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('outline', 'outline-2', 'outline-transparent');
+        } else {
+          entry.target.classList.remove('outline', 'outline-2', 'outline-transparent');
+        }
+      });
 
-  useEffect(() => {
-    const timer = setTimeout(() => setIsVisible(true), 500);
-    return () => clearTimeout(timer);
-  }, []);
+      const visibleEntries = entries.filter(entry => entry.isIntersecting);
+      if (!visibleEntries.length) return;
 
-  useEffect(() => {
-    // listen for the hashchange event
-    window.addEventListener('hashchange', () => {
-      // get the entire url from the browser
-      const url = window.location.href;
-      setActiveSection(url.slice(url.indexOf('#') + 1));
-    });
-  }, []);
+      const topSection = visibleEntries.reduce((top, current) => {
+        const topIndex = sections.indexOf(top.target.id);
+        const currentIndex = sections.indexOf(current.target.id);
+        return currentIndex < topIndex ? current : top;
+      });
 
-  return (
-    <motion.nav className="fixed left-4 top-48 h-screen flex flex-col justify-start space-y-20">
-      {sections.map((section, index) => (
-        <motion.a
-          key={section}
-          href={`#${section}`}
-          onClick={(e) => {
-            e.preventDefault();
-            document.getElementById(section)?.scrollIntoView({ behavior: 'smooth' });
-          }}
-          className={`text-xs text-center font-bold rotate-90 cursor-pointer tracking-wide ${
-            activeSection === section ? 'text-gray-900 font-extrabold' : 'text-gray-400'
-          }`}
-          initial={{ opacity: 0, x: -200 }}
-          animate={{ opacity: isVisible ? 1 : 0, x: isVisible ? 0 : -200, rotate: 90 }}
-          whileHover={{ scale: 1.1, color: "#000" }}
-          transition={{ duration: 0.1, delay: isVisible ? index * 0.1 : 0 }}
-        >
-          {section.toUpperCase()}
-        </motion.a>
-      ))}
-    </motion.nav>
+      if (topSection.target.id !== lastSection) {
+        lastSection = topSection.target.id;
+        window.history.replaceState(null, '', `#${topSection.target.id}`);
+        window.dispatchEvent(new HashChangeEvent('hashchange'));
+      }
+    },
+    {
+      root: null,
+      rootMargin: '-20% 0px -70% 0px',
+      threshold: [0, 0.1, 0.2, 0.3, 0.4, 0.5] // More granular thresholds
+    }
   );
+
+  sections.forEach(section => {
+    const element = document.getElementById(section);
+    if (element) observer.observe(element);
+  });
+
+  return () => observer.disconnect();
 }
 
 export default function Portfolio() {
   useEffect(() => {
-    // Handle initial hash on load
     const hash = window.location.hash.slice(1);
-    if (hash && sections.includes(hash)) {
+    if (hash) {
       document.getElementById(hash)?.scrollIntoView({ behavior: 'smooth' });
     }
-
-    // Set up intersection observer
-    const observer = new IntersectionObserver(
-      (entries) => {
-        // sort entries by intersectionRatio
-        entries.sort((a, b) => b.intersectionRatio - a.intersectionRatio);
-        entries.forEach(entry => {
-          if (entry.isIntersecting && entry.intersectionRatio > 0.5) {
-            window.history.replaceState(null, '', `#${entry.target.id}`);
-            // Trigger a hashchange event so FloatingNav updates
-            window.dispatchEvent(new HashChangeEvent('hashchange'));
-          }
-        });
-      },
-      { threshold: 0.75 }
-    );
-
-    sections.forEach(section => {
-      const element = document.getElementById(section);
-      if (element) observer.observe(element);
-    });
-    
-    return () => observer.disconnect();
+    return setUpSectionObserver();
   }, []);
 
   return (
-    <div className="min-h-screen flex">
-      <main className="ml-20 w-full max-w-4xl px-8 -mt-24">
+      <main className="min-h-screen w-full">
         <FloatingNav />
         
-        <section id="education" className="pt-24">
+        <section id="education" className="pt-20">
           <h2 className="text-2xl font-semibold mb-8">Education</h2>
           {portfolioData.education.map((edu, i) => (
             <div key={i} className="mb-6 border-b pb-4">
@@ -98,7 +73,7 @@ export default function Portfolio() {
           ))}
         </section>
 
-        <section id="work" className="pt-24">
+        <section id="work" className="pt-16">
           <h2 className="text-2xl font-semibold mb-8">Work Experience</h2>
           {portfolioData.work.map((job, i) => (
             <div key={i} className="mb-6 border-b pb-10">
@@ -109,7 +84,7 @@ export default function Portfolio() {
           ))}
         </section>
 
-        <section id="projects" className="pt-24">
+        <section id="projects" className="pt-16">
           <h2 className="text-2xl font-semibold mb-8">Projects</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             {portfolioData.projects.map((project, i) => (
@@ -122,7 +97,7 @@ export default function Portfolio() {
           </div>
         </section>
 
-        <section id="skills" className="pt-24 mb-16">
+        <section id="skills" className="pt-16 mb-16">
           <h2 className="text-2xl font-semibold mb-8">Skills</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             {Object.entries(portfolioData.skills).map(([category, items]) => (
@@ -138,6 +113,5 @@ export default function Portfolio() {
           </div>
         </section>
       </main>
-    </div>
   );
 }

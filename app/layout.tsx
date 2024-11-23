@@ -55,9 +55,9 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased bg-tan text-gray-800 p-8 relative overflow-x-hidden`}
       >
-        <OptimizationBackground />
+        {/* <OptimizationBackground /> */}
         <Header />
-        <main className="min-h-screen font-sans text-left max-w-3xl mx-auto relative z-10">
+        <main className="min-h-screen font-sans text-left max-w-3xl mx-auto relative z-10 px-16">
           {children}
         </main>
       </body>
