@@ -41,7 +41,6 @@ export default function FloatingNav() {
               } else {
                 element.scrollIntoView({ behavior: 'smooth' });
               }
-              setActiveSection(section);
             }
           }}
           className={`text-xs text-center font-bold rotate-90 cursor-pointer tracking-wide ${
