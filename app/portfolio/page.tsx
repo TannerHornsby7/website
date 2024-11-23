@@ -28,7 +28,7 @@ function setUpSectionObserver() {
     },
     {
       root: null,
-      rootMargin: '-20% 0px -70% 0px',
+      rootMargin: '-50% 0px -70% 0px',
       threshold: [0, 0.1, 0.2, 0.3, 0.4, 0.5] // this means the callback gets called every 10% of the way through the section
     }
   );
@@ -45,16 +45,20 @@ export default function Portfolio() {
   useEffect(() => {
     const hash = window.location.hash.slice(1);
     if (hash) {
-      document.getElementById(hash)?.scrollIntoView({ behavior: 'smooth' });
+      if (hash === 'education') {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      } else {
+        document.getElementById(hash)?.scrollIntoView({ behavior: 'smooth' });
+      }
     }
     return setUpSectionObserver();
   }, []);
 
   return (
-      <main className="min-h-screen w-full">
+      <main className="min-h-screen w-full pl-16">
         <FloatingNav />
         
-        <section id="education" className="pt-20">
+        <section id="education">
           <h2 className="text-2xl font-semibold mb-8">Education</h2>
           {portfolioData.education.map((edu, i) => (
             <div key={i} className="mb-6 border-b pb-4">

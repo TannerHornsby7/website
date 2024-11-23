@@ -11,7 +11,7 @@ export default function FloatingNav() {
   );
 
   useEffect(() => {
-    const timer = setTimeout(() => setIsVisible(true), 500);
+    const timer = setTimeout(() => setIsVisible(true), 750);
     return () => clearTimeout(timer);
   }, []);
 
@@ -36,7 +36,11 @@ export default function FloatingNav() {
             e.preventDefault();
             const element = document.getElementById(section);
             if (element) {
-              element.scrollIntoView({ behavior: 'smooth' });
+              if (section === 'education') {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+              } else {
+                element.scrollIntoView({ behavior: 'smooth' });
+              }
               setActiveSection(section);
             }
           }}
