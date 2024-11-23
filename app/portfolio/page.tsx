@@ -69,7 +69,7 @@ export default function Portfolio() {
           ))}
         </section>
 
-        <section id="work" className="pt-16">
+        <section id="work" className="pt-24">
           <h2 className="text-2xl font-semibold mb-8">Work Experience</h2>
           {portfolioData.work.map((job, i) => (
             <div key={i} className="mb-6 border-b pb-10">
@@ -80,7 +80,7 @@ export default function Portfolio() {
           ))}
         </section>
 
-        <section id="projects" className="pt-16">
+        <section id="projects" className="pt-24">
           <h2 className="text-2xl font-semibold mb-8">Projects</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             {portfolioData.projects.map((project, i) => (
@@ -93,7 +93,7 @@ export default function Portfolio() {
           </div>
         </section>
 
-        <section id="skills" className="pt-16 mb-16">
+        <section id="skills" className="pt-24 mb-16">
           <h2 className="text-2xl font-semibold mb-8">Skills</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             {Object.entries(portfolioData.skills).map(([category, items]) => (
