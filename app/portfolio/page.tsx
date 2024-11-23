@@ -29,7 +29,7 @@ function setUpSectionObserver() {
     {
       root: null,
       rootMargin: '-20% 0px -70% 0px',
-      threshold: [0, 0.1, 0.2, 0.3, 0.4, 0.5] // More granular thresholds
+      threshold: [0, 0.1, 0.2, 0.3, 0.4, 0.5] // this means the callback gets called every 10% of the way through the section
     }
   );
 
