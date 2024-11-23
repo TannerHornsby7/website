@@ -11,14 +11,6 @@ function setUpSectionObserver() {
   
   const observer = new IntersectionObserver(
     (entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('outline', 'outline-2', 'outline-transparent');
-        } else {
-          entry.target.classList.remove('outline', 'outline-2', 'outline-transparent');
-        }
-      });
-
       const visibleEntries = entries.filter(entry => entry.isIntersecting);
       if (!visibleEntries.length) return;
 
