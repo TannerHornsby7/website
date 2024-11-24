@@ -20,6 +20,7 @@ function setUpSectionObserver() {
         return currentIndex < topIndex ? current : top;
       });
 
+      console.log(topSection.target.id, lastSection);
       if (topSection.target.id !== lastSection) {
         lastSection = topSection.target.id;
         window.history.replaceState(null, '', `#${topSection.target.id}`);
@@ -28,8 +29,9 @@ function setUpSectionObserver() {
     },
     {
       root: null,
-      rootMargin: '-50% 0px -70% 0px',
-      threshold: [0, 0.1, 0.2, 0.3, 0.4, 0.5] // this means the callback gets called every 10% of the way through the section
+      rootMargin: '0px',
+      threshold: [0.5, 0.9, 1] // this means the callback gets called when the section is 50%, 90%, and 100% visible
+      // thank you this guy:https://stackoverflow.com/questions/62084306/intersectionobserver-not-working-in-safari-or-ios
     }
   );
 

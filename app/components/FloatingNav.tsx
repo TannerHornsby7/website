@@ -42,6 +42,7 @@ export default function FloatingNav() {
                 element.scrollIntoView({ behavior: 'smooth' });
               }
             }
+            // might have to set active sectoin here for safari because their observer is buggy
           }}
           className={`text-xs text-center font-bold rotate-90 cursor-pointer tracking-wide ${
             activeSection === section ? 'text-gray-900 font-extrabold' : 'text-gray-400'
