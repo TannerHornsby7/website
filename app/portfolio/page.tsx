@@ -20,7 +20,6 @@ function setUpSectionObserver() {
         return currentIndex < topIndex ? current : top;
       });
 
-      console.log(topSection.target.id, lastSection);
       if (topSection.target.id !== lastSection) {
         lastSection = topSection.target.id;
         window.history.replaceState(null, '', `#${topSection.target.id}`);

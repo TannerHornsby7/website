@@ -8,28 +8,29 @@ export default function Home() {
         <section className="mt-8">
           <h2 className="text-base font-semibold">Currently</h2>
           <ul className="list-disc list-inside">
-            <li>I am finishing my computer science degree at the University of Chicago</li>
-            <li>I am building a music sharing platform called <a href="https://ouradio.net">ouradio</a></li>
-            <li>I make music</li>
+            <li>Finishing my computer science degree at the University of Chicago</li>
+            <li>Building a music sharing platform</li>
+            {/* called <a href="https://ouradio.net">ouradio</a> */}
+            <li>Making music</li>
           </ul>
         </section>
 
         <section className="mt-8">
           <h2 className="text-base font-semibold">Previously</h2>
-          <p>My time at Edovo, Data for Common Good, Hohonu, and UChicago</p>
+          <p>Empowered over 1 million users to learn with Edovo. Extended patient trial matching capabilites at Data for the Common Good. Extracted business insights on water level prediction at Hohonu.</p>
         </section>
 
         <section className="mt-8">
           <h2 className="text-base font-semibold">Broadly</h2>
-          <p>I am interested in music, optimization, ML, ...</p>
+          <p>I am interested in optimziation, cloud development, music, and more.</p>
         </section>
 
         <section className="mt-8">
           <h2 className="text-base font-semibold">Contact</h2>
-          <p>You can email me at <a href="mailto:tannerhornsby386@gmail.com">tannerhornsby386@gmail.com</a>. I am on <a href="https://github.com/tannerhornsby7">Github</a> and <a href="https://x.com/thornsbees">Twitter</a>.</p>
+          <p>You can email me at <a href="mailto:tannerhornsby386@gmail.com">tannerhornsby386@gmail.com</a>. I am also on <a href="https://github.com/tannerhornsby7">Github</a> and <a href="https://x.com/thornsbees">Twitter</a>.</p>
         </section>
 
-        <section className="mt-8">
+        {/* <section className="mt-8">
           <h2 className="text-base font-semibold">Recent Writing</h2>
           <ul>
             <li>
@@ -45,7 +46,7 @@ export default function Home() {
               <p>First few lines of the post...</p>
             </li>
           </ul>
-        </section>
+        </section> */}
     </>
   );
 }

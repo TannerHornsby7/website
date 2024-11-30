@@ -2,8 +2,30 @@
 import type { Schema } from "@/amplify/data/resource"
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { generateClient } from "aws-amplify/api"
+import { downloadData } from 'aws-amplify/storage';
+
+try {
+  const result = downloadData({
+    path: "album/2024/1.jpg",
+    options: {
+      // Specify a target bucket using name assigned in Amplify Backend
+      bucket: "secondBucket"
+    }
+  }).result;
+} catch (error) {
+  console.log(`Error: ${error}`)
+}
 
 const client = generateClient<Schema>()
+
+export const useMarkdown = (markdown: string) => {
+    return useQuery({
+        queryKey: ['markdown', markdown],
+        queryFn: async () => {
+            return markdown;
+        }
+    });
+};
 
 export const usePosts = (page = 1, limit = 10) => {
     return useQuery({
