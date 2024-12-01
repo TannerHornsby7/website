@@ -1,3 +1,5 @@
+'use client';
+
 export default function Home() {
   return (
     <>
@@ -11,23 +13,23 @@ export default function Home() {
             <li>Finishing my computer science degree at the University of Chicago</li>
             <li>Building a music sharing platform</li>
             {/* called <a href="https://ouradio.net">ouradio</a> */}
-            <li>Making music</li>
+            {/* <li></li> */}
           </ul>
         </section>
 
         <section className="mt-8">
           <h2 className="text-base font-semibold">Previously</h2>
-          <p>Empowered over 1 million users to learn with Edovo. Extended patient trial matching capabilites at Data for the Common Good. Extracted business insights on water level prediction at Hohonu.</p>
+          <p>Empowered over 1 million users to learn with <a href="https://edovo.org">Edovo</a>. Extended patient trial matching capabilites at <a href="https://commons.cri.uchicago.edu">Data for the Common Good</a>. Extracted business insights on water level prediction at <a href="https://www.hohonu.io">Hohonu</a>.</p>
         </section>
 
         <section className="mt-8">
           <h2 className="text-base font-semibold">Broadly</h2>
-          <p>I am interested in optimziation, cloud development, music, and more.</p>
+          <p>I am interested in optimization, cloud development, music, and more.</p>
         </section>
 
         <section className="mt-8">
           <h2 className="text-base font-semibold">Contact</h2>
-          <p>You can email me at <a href="mailto:tannerhornsby386@gmail.com">tannerhornsby386@gmail.com</a>. I am also on <a href="https://github.com/tannerhornsby7">Github</a> and <a href="https://x.com/thornsbees">Twitter</a>.</p>
+          <p>You can email me at <a href="mailto:tannerhornsby386@gmail.com">tannerhornsby386@gmail.com</a>. I am also on <a href="https://github.com/tannerhornsby7">Github</a>. If you are coming from one of my open source projects, feel free to reach out any time! If you gained value from my work and would like to support it, I am on <a href="https://www.buymeacoffee.com/tannerhornsby">buy me a coffee!</a></p>
         </section>
 
         {/* <section className="mt-8">

@@ -50,7 +50,7 @@ export default function CodeEditor({ code, language, description }: CodeEditorPr
       // Capture console output
       let output = '';
       const mockConsole = {
-        log: (...args: any[]) => {
+        log: (...args: unknown[]) => {
           output += args.join(' ') + '\n';
         }
       };

@@ -5,8 +5,9 @@ import portfolioData from "@/data/portfolio.json";
 import FloatingNav from "@/app/components/FloatingNav";
 const sections = ['education', 'work', 'projects', 'skills'];
 
-
 function setUpSectionObserver() {
+  if (typeof window === 'undefined') return;
+  
   let lastSection = '';
   
   const observer = new IntersectionObserver(
@@ -29,8 +30,7 @@ function setUpSectionObserver() {
     {
       root: null,
       rootMargin: '0px',
-      threshold: [0.5, 0.9, 1] // this means the callback gets called when the section is 50%, 90%, and 100% visible
-      // thank you this guy:https://stackoverflow.com/questions/62084306/intersectionobserver-not-working-in-safari-or-ios
+      threshold: [0.5, 0.9, 1]
     }
   );
 
@@ -44,10 +44,12 @@ function setUpSectionObserver() {
 
 export default function Portfolio() {
   useEffect(() => {
+    if (typeof window === 'undefined') return;
+
     const hash = window.location.hash.slice(1);
     if (hash) {
       if (hash === 'education') {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
+        window.scrollTo({ top: -10, behavior: 'smooth' });
       } else {
         document.getElementById(hash)?.scrollIntoView({ behavior: 'smooth' });
       }

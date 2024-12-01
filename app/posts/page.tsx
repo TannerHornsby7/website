@@ -1,41 +1,41 @@
 'use client';
-import { usePosts } from '@/hooks/blog';
-import Loader from '@/app/components/Loader';
+// import { usePosts } from '@/hooks/blog';
+// import Loader from '@/app/components/Loader';
 import UnderConstruction from '@/app/under-construction';
 
 export default function PostsPage() {
-  const { data: posts, isLoading, error } = usePosts();
+  // const { data: posts, isLoading, error } = usePosts();
 
-  if (isLoading) return <Loader />;
-  if (error) return <div>Error loading posts</div>;
-  if (!posts?.data) return <div>No posts found</div>;
+  // if (isLoading) return <Loader />;
+  // if (error) return <div>Error loading posts</div>;
+  // if (!posts?.data) return <div>No posts found</div>;
 
-  // Sort posts by date and group them by month+year
-  const sortedPosts = [...posts.data].sort((a, b) => {
-    // Handle cases where createdAt might be null/undefined
-    if (!a || !b) return 0;
-    if (!a.createdAt && !b.createdAt) return 0;
-    if (!a.createdAt) return 1;
-    if (!b.createdAt) return -1;
+  // // Sort posts by date and group them by month+year
+  // const sortedPosts = [...posts.data].sort((a, b) => {
+  //   // Handle cases where createdAt might be null/undefined
+  //   if (!a || !b) return 0;
+  //   if (!a.createdAt && !b.createdAt) return 0;
+  //   if (!a.createdAt) return 1;
+  //   if (!b.createdAt) return -1;
     
-    return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
-  });
+  //   return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
+  // });
 
-  const groupedPosts = sortedPosts.reduce((groups: Record<string, any[]>, post) => {
-    if (!post) return groups;
-    const monthYear = post.createdAt 
-      ? new Date(post.createdAt).toLocaleDateString('en-US', {
-          month: 'long',
-          year: 'numeric',
-        })
-      : 'No Date';
+  // const groupedPosts = sortedPosts.reduce((groups: Record<string, any[]>, post) => {
+  //   if (!post) return groups;
+  //   const monthYear = post.createdAt 
+  //     ? new Date(post.createdAt).toLocaleDateString('en-US', {
+  //         month: 'long',
+  //         year: 'numeric',
+  //       })
+  //     : 'No Date';
     
-    if (!groups[monthYear]) {
-      groups[monthYear] = [];
-    }
-    groups[monthYear].push(post);
-    return groups;
-  }, {});
+  //   if (!groups[monthYear]) {
+  //     groups[monthYear] = [];
+  //   }
+  //   groups[monthYear].push(post);
+  //   return groups;
+  // }, {});
 
   return (<UnderConstruction />);
 

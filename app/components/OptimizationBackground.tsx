@@ -65,7 +65,6 @@ const generateGradientPath = (width: number, height: number): Point[] => {
 
   let x = (Math.random() - 0.5) * 4; // Random start position
   let y = (Math.random() - 0.5) * 4;
-  let prevZ = objectiveFunction(x, y);
 
   while (path.length < 200) {
     const z = objectiveFunction(x, y);
@@ -104,8 +103,6 @@ const generateGradientPath = (width: number, height: number): Point[] => {
     // Clamp x and y within bounds
     x = Math.max(Math.min(x, 4), -4);
     y = Math.max(Math.min(y, 4), -4);
-
-    prevZ = z;
   }
 
   return path;

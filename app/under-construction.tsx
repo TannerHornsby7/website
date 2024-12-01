@@ -1,7 +1,14 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import TuringMachine from './components/TuringMachine';
+import dynamic from 'next/dynamic';
+
+const TuringMachine = dynamic(() => import('./components/TuringMachine'), {
+  ssr: false,
+  loading: () => (
+    <div className="w-full h-48 bg-gray-100 rounded-lg animate-pulse"></div>
+  ),
+});
 
 const INITIAL_CODE = `state0 0 0 R state1
 state0 1 1 R state0
@@ -11,14 +18,14 @@ state0 1 1 R state0
 export default function UnderConstruction() {
   return (
     <div className="min-h-screen flex flex-col items-center justify-center space-y-8 py-12 px-4">
-      <motion.h1 
+      <motion.h4 
         className="text-4xl font-bold text-gray-900"
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
       >
-        🚧 This page is under construction! 🚧
-      </motion.h1>
+        This page is under construction!
+      </motion.h4>
       
       <motion.p 
         className="text-lg text-center max-w-md"

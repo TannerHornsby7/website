@@ -4,33 +4,33 @@
         "school": "University of Chicago",
         "degree": "B.S. Computer Science",
         "date": "2020 - 2024",
-        "details": "Focused on systems programming and machine learning. Coursework includes Operating Systems, Parallel Computing, and Machine Learning. Research assistant in the Systems Group working on optimizing distributed systems."
+        "details": "Focused on systems programming and machine learning. Coursework includes Computer Architecture, Machine Learning, and Machine Learning for Computer Systems."
       },
       {
         "school": "Texas Academy of Mathematics and Science",
-        "degree": "B.S. Physics",
-        "date": "2018 - 2022",
-        "details": "Focused on physics and mathematics. Coursework includes Quantum Mechanics, General Relativity, and Differential Geometry. Research assistant in the Systems Group working on optimizing distributed systems."
+        "degree": "High School Diploma",
+        "date": "2018 - 2020",
+        "details": "Focused on physics and math. Worked in Dr. Miguel Acevedo's energy engineering lab."
       }
     ],
     "work": [
       {
         "company": "Edovo",
-        "role": "Software Engineer",
+        "role": "Software Engineer Intern",
         "date": "2023",
-        "description": "Built educational software for incarcerated individuals, focusing on offline-first architecture and secure content delivery. Implemented a custom caching system that reduced data usage by 40%."
+        "description": "Built educational software for incarcerated individuals, focusing on offline-first architecture and secure content delivery. Developed a Java service which streamed batches of updates from our SQL database to sumo logic, making it easy for developers to run complex queries on our data. Created a customer facing full-stack resume builder, using React, TailwindCSS, and Java."
       },
       {
         "company": "Data for Common Good",
-        "role": "Data Scientist",
+        "role": "Data Science Intern",
         "date": "2022",
-        "description": "Led environmental data analysis projects that directly influenced policy decisions. Created predictive models for air quality assessment using historical sensor data and weather patterns."
+        "description": "Developed a feedback collection system for the patient trial matching program using Postgres and FastAPI."
       },
       {
         "company": "Hohonu",
         "role": "Software Engineer Intern",
-        "date": "2022",
-        "description": "Developed real-time water level monitoring systems using IoT sensors. Built data pipelines that processed readings from over 1000 sensors, providing crucial environmental insights."
+        "date": "2021",
+        "description": "Developed real-time water level monitoring systems using IoT sensors. Integrated data from custom pipeline to detect anomalies in water levels, utilized harmonic regression to predict water levels."
       }
     ],
     "projects": [
@@ -41,30 +41,24 @@
         "tech": ["Next.js", "WebRTC", "TypeScript", "TailwindCSS"]
       },
       {
-        "name": "Distributed Cache System",
-        "date": "2023",
-        "description": "Built a distributed caching system supporting multiple consistency models. Implemented leader election, conflict resolution, and partition tolerance.",
-        "tech": ["Rust", "gRPC", "Redis", "Docker"]
+        "name": "RISC-V Simulator",
+        "date": "2022",
+        "description": "Developed a simulator for the RISC-V architecture, a parallel computing architecture. Implemented a custom memory hierarchy, branch prediction, and cache coherence protocol.",
+        "tech": ["C", "RISC-V", "Git"]
       },
       {
-        "name": "Neural Audio Synthesis",
-        "date": "2022",
-        "description": "Developed a deep learning model for generating musical instruments using adversarial networks. Created a web interface for real-time sound synthesis.",
-        "tech": ["Python", "PyTorch", "React", "Web Audio API"]
-      },
-      {
-        "name": "Environmental Sensor Network",
-        "date": "2022",
-        "description": "Designed and implemented a low-power sensor network for environmental monitoring. Created visualization tools for real-time data analysis.",
-        "tech": ["C++", "LoRaWAN", "PostgreSQL", "Grafana"]
+        "name": "CrustyDB",
+        "date": "2021",
+        "description": "Created a SQL database management system in Rust, implementing a B-Tree as the database file format, implementing the Volcano Model for query processing, and a Lock Manager for concurrency control.",
+        "tech": ["Rust", "SQL", "Git"]
       }
     ],
     "skills": {
-      "languages": ["TypeScript", "Python", "Rust", "C++", "SQL", "Go"],
-      "frontend": ["React", "Next.js", "TailwindCSS", "Three.js", "WebGL"],
-      "backend": ["Node.js", "Django", "FastAPI", "gRPC", "GraphQL"],
-      "databases": ["PostgreSQL", "MongoDB", "Redis", "Cassandra"],
-      "cloud": ["AWS", "GCP", "Docker", "Kubernetes", "Terraform"],
+      "languages": ["Javascript", "TypeScript", "Python", "Rust", "C/C++", "SQL"],
+      "frontend": ["React", "Next.js", "TailwindCSS", "HTML/CSS"],
+      "backend": ["Node.js", "Flask", "FastAPI", "GraphQL"],
+      "databases": ["PostgreSQL", "DynamoDB", "Redis", "MongoDB"],
+      "cloud": ["AWS", "GCP", "Docker", "Terraform"],
       "ml": ["PyTorch", "TensorFlow", "scikit-learn", "NumPy", "Pandas"],
       "tools": ["Git", "Linux", "Vim", "VSCode", "Postman"]
     }

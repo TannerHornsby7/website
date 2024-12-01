@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, useRef, KeyboardEvent } from 'react';
+import { useState, useEffect, useRef, KeyboardEvent, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FaPlay, FaPause, FaStepForward, FaRedo } from 'react-icons/fa';
 
@@ -9,9 +9,10 @@ interface TuringMachineProps {
 }
 
 export default function TuringMachine({ initialCode = '' }: TuringMachineProps) {
+  const [mounted, setMounted] = useState(false);
   const [code, setCode] = useState(initialCode);
-  const [tape, setTape] = useState<string[]>(Array(100).fill('')); // Increased tape size
-  const [head, setHead] = useState(50); // Start head in middle
+  const [tape, setTape] = useState<string[]>([]);
+  const [head, setHead] = useState(0);
   const [currentState, setCurrentState] = useState('state0');
   const [isRunning, setIsRunning] = useState(false);
   const [speed, setSpeed] = useState(500);
@@ -19,7 +20,13 @@ export default function TuringMachine({ initialCode = '' }: TuringMachineProps) 
   const tapeRefs = useRef<(HTMLInputElement | null)[]>([]);
   const tapeContainerRef = useRef<HTMLDivElement>(null);
 
-  const step = () => {
+  useEffect(() => {
+    setMounted(true);
+    setTape(Array(100).fill(''));
+    setHead(50);
+  }, []);
+
+  const step = useCallback(() => {
     const lines = code.split('\n').filter(line => line.trim() && !line.startsWith('//'));
     const currentSymbol = tape[head] || '0';
     let matched = false;
@@ -57,7 +64,7 @@ export default function TuringMachine({ initialCode = '' }: TuringMachineProps) 
       setMachineState('reject');
       setIsRunning(false);
     }
-  };
+  }, [code, tape, head, currentState, setTape, setHead, setCurrentState, setMachineState, setIsRunning]);
 
   useEffect(() => {
     let interval: NodeJS.Timeout;
@@ -66,7 +73,7 @@ export default function TuringMachine({ initialCode = '' }: TuringMachineProps) 
       interval = setInterval(step, speed);
     }
     return () => clearInterval(interval);
-  }, [isRunning, tape, head, currentState, code, speed]);
+  }, [isRunning, speed, step, setMachineState]);
 
   // Scroll to head position when it changes
   useEffect(() => {
@@ -104,6 +111,10 @@ export default function TuringMachine({ initialCode = '' }: TuringMachineProps) 
     setMachineState('idle');
     setIsRunning(false);
   };
+
+  if (!mounted) {
+    return null;
+  }
 
   return (
     <div className="space-y-4">

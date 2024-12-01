@@ -18,7 +18,7 @@ const geistMono = localFont({
 
 export const metadata: Metadata = {
   title: "Tanner Hornsby",
-  description: "adventure is in front of you",
+  description: "the website",
 };
 
 export default function RootLayout({
@@ -26,28 +26,6 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  if (typeof window !== 'undefined') {
-    let lastScroll = 0;
-    
-    window.addEventListener('scroll', () => {
-      const currentScroll = window.pageYOffset;
-      const header = document.documentElement;
-      
-      if (currentScroll <= 0) {
-        header.style.setProperty('--header-translate', '0');
-      }
-      
-      if (currentScroll > lastScroll && currentScroll > 100) {
-        header.style.setProperty('--header-translate', '-100%');
-      }
-      
-      if (currentScroll < lastScroll) {
-        header.style.setProperty('--header-translate', '0');
-      }
-      
-      lastScroll = currentScroll;
-    });
-  }
 
   return (
     <html lang="en">
