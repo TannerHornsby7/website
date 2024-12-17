@@ -1,6 +1,6 @@
 'use client';
 
-import { motion } from "framer-motion";
+import { motion, None } from "framer-motion";
 import { useEffect, useState, useMemo } from "react";
 
 interface Point {
@@ -38,7 +38,7 @@ const project3DTo2D = (x: number, y: number, z: number) => ({
 
 // Generate the surface mesh
 const generateSurface = (width: number, height: number) => {
-  const scale = Math.min(width, height) * 0.3;
+  const scale = Math.min(width, height) * 0.45;
   const halfGrid = GRID_SIZE / 2;
   const gridStep = 5 / GRID_SIZE;
 
@@ -58,13 +58,10 @@ const generateSurface = (width: number, height: number) => {
 };
 
 // Generate a gradient descent path
-const generateGradientPath = (width: number, height: number): Point[] => {
-  const scale = Math.min(width, height) * 0.3;
+const generateGradientPath = (width: number, height: number, x: number = (Math.random() - 0.5) * 4, y: number = (Math.random() - 0.5) * 4): Point[] => {
+  const scale = Math.min(width, height) * 0.45;
   const path: Point[] = [];
   const visited = new Set<string>();
-
-  let x = (Math.random() - 0.5) * 4; // Random start position
-  let y = (Math.random() - 0.5) * 4;
 
   while (path.length < 200) {
     const z = objectiveFunction(x, y);
@@ -129,7 +126,21 @@ export default function OptimizationBackground() {
 
     updateDimensions();
     window.addEventListener("resize", updateDimensions);
-    return () => window.removeEventListener("resize", updateDimensions);
+    window.addEventListener("mousedown", (e) => {
+      setCelebrating(false);
+      setPath([])
+      setPath(generateGradientPath(dimensions.width, dimensions.height, (e.pageX / dimensions.width - 0.5) * 4, (e.pageY / dimensions.height - 0.5) * 4))
+      console.log("click drop")
+      console.log(e.pageX, e.pageY)
+      console.log(dimensions.width, dimensions.height)
+  })
+    return () => {
+      window.removeEventListener("resize", updateDimensions);
+      // figure out how to debug events better
+      window.removeEventListener("mousedown", (e) => {
+        generateGradientPath(dimensions.width, dimensions.height, e.pageX, e.pageY)
+    })
+    }
   }, []);
 
   // Generate surface and gradient path
@@ -152,7 +163,7 @@ export default function OptimizationBackground() {
           setCelebrating(true);
           setTimeout(() => {
             setCelebrating(false);
-            setPath(generateGradientPath(dimensions.width, dimensions.height));
+            // setPath(generateGradientPath(dimensions.width, dimensions.height));
           }, CELEBRATION_DELAY);
           return 0;
         }
@@ -208,16 +219,15 @@ export default function OptimizationBackground() {
           animate={{
             cx: path[currentIndex]?.x,
             cy: path[currentIndex]?.y,
-            scale: celebrating ? 0 : 1,
-            opacity: [1, 0],
+            // opacity: [1, 0],
           }}
           transition={{ 
             duration: ANIMATION_DURATION,
             ease: "linear",
-            opacity: {
-              duration: BALL_FADE_OUT_DURATION / 1000, // Convert ms to seconds
-              ease: "easeInOut"
-            }
+            // opacity: {
+            //   duration: BALL_FADE_OUT_DURATION / 1000, // Convert ms to seconds
+            //   ease: "easeInOut"
+            // }
           }}
           r={8}
           fill="darkgray"
