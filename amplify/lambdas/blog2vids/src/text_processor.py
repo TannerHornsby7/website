@@ -9,18 +9,50 @@ def read_blog_text(file_path: str) -> str:
         return f.read()
 
 def split_text_into_chunks(text: str, words_per_chunk: int = WORDS_PER_CHUNK) -> List[str]:
-    """Split text into chunks of specified word count"""
-    words = text.split()
+    """Split text into chunks of specified word count while preserving sentences when possible"""
+    # Split into sentences while preserving punctuation
+    sentences = []
+    current = ""
+    for char in text:
+        current += char
+        if char in ".!?":
+            sentences.append(current)
+            current = ""
+    if current:  # Add any remaining text
+        sentences.append(current)
+        
+    sentences = [s.strip() for s in sentences if s.strip()]
+    
     chunks = []
     current_chunk = []
+    current_word_count = 0
     
-    for word in words:
-        current_chunk.append(word)
-        if len(current_chunk) >= words_per_chunk:
-            chunks.append(' '.join(current_chunk))
-            current_chunk = []
+    for sentence in sentences:
+        sentence_words = sentence.split()
+        sentence_word_count = len(sentence_words)
+        
+        # If sentence is longer than chunk size, split it
+        if sentence_word_count > words_per_chunk:
+            words = sentence_words
+            while words:
+                chunk_words = words[:words_per_chunk]
+                chunks.append(' '.join(chunk_words))  # Don't add period
+                words = words[words_per_chunk:]
+            continue
             
-    if current_chunk:
-        chunks.append(' '.join(current_chunk))
+        # If adding this sentence would exceed word limit
+        if current_word_count + sentence_word_count > words_per_chunk and current_chunk:
+            # Save current chunk and start new one
+            chunks.append(' '.join(current_chunk))  # Don't add period
+            current_chunk = []
+            current_word_count = 0
+        
+        # Add sentence to current chunk
+        current_chunk.append(sentence)
+        current_word_count += sentence_word_count
     
-    return chunks 
+    # Add any remaining text
+    if current_chunk:
+        chunks.append(' '.join(current_chunk))  # Don't add period
+    
+    return chunks

@@ -1,6 +1,7 @@
 """Configuration settings for the video generation system"""
 
 # 11 labs API Configuration
+API_KEY = 'test_key'
 VOICE_ID = 'Xb7hH8MSUJpSbSDYk0k2'
 
 # Text Processing

@@ -31,7 +31,7 @@ def test_split_text_into_chunks_empty():
     assert split_text_into_chunks("") == []
 
 def test_split_text_into_chunks_smaller_than_limit():
-    text = "Short text"
+    text = "Short text."
     chunks = split_text_into_chunks(text, words_per_chunk=5)
     assert len(chunks) == 1
     assert chunks[0] == text 

@@ -6,7 +6,7 @@ import numpy as np
 from scipy.io.wavfile import write
 from PIL import Image
 import tempfile
-from src.video_generator import create_text_clip, create_video_clips, fl_gradient_pulse
+from src.video_generator import create_text_clip, create_video_clips
 import os
 @pytest.fixture
 def sample_audio(request):
@@ -37,18 +37,6 @@ def test_create_text_clip():
     clip = create_text_clip(text, video_size, duration)
     assert clip.duration == duration
     assert clip.size[0] <= video_size[0]
-
-def test_fl_gradient_pulse():
-    """Test gradient pulse effect"""
-    frame = np.ones((100, 100), dtype=np.uint8) * 255
-    t = 0.5
-    
-    def mock_get_frame(_):
-        return frame
-    
-    result = fl_gradient_pulse(mock_get_frame, t)
-    assert isinstance(result, np.ndarray)
-    assert result.shape == frame.shape
 
 @pytest.mark.integration
 def test_create_video_clips(sample_audio, tmp_path):

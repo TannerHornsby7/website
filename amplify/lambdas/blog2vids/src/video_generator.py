@@ -6,6 +6,7 @@ from moviepy import TextClip, ImageClip, AudioFileClip, CompositeVideoClip, conc
 from typing import List, Tuple, Optional
 from .config import FONT_PATH, FONT_SIZE
 from .image_processor import resize_and_crop_image
+import moviepy.video.fx as vfx
 
 def validate_audio_file(audio_file: str) -> Optional[AudioFileClip]:
     """Validate and load audio file, return None if invalid"""
@@ -27,24 +28,54 @@ def validate_audio_file(audio_file: str) -> Optional[AudioFileClip]:
 
 def create_text_clip(text: str, video_size: Tuple[int, int], duration: float) -> TextClip:
     """Create text clip with effects"""
+    # Create basic text clip
     txt_clip = TextClip(
         text=text,
         font=FONT_PATH,
         font_size=FONT_SIZE,
         color='white',
-        stroke_color='black',
-        stroke_width=3,
         method='caption',
+        bg_color=None,
         size=(int(video_size[0]*0.8), None),
         text_align='center'
-    )
-    txt_clip = txt_clip.with_duration(duration)
+    ).with_duration(duration)
+    
     return txt_clip
+
+def create_progress_indicator(text: str, video_size: Tuple[int, int], duration: float) -> TextClip:
+    """Create a progress indicator that underlines words as they are spoken"""
+    words = text.split()
+    total_words = len(words)
+    clips = []
+    
+    # Calculate word positions and timings
+    for i, word in enumerate(words):
+        start_time = (i / total_words) * duration
+        end_time = ((i + 1) / total_words) * duration
+        
+        # Create underline clip for this word
+        underline = TextClip(
+            text="_" * len(word),
+            font=FONT_PATH,
+            font_size=FONT_SIZE,
+            color='white',
+            method='caption',
+            bg_color=None,
+            size=(int(video_size[0]*0.8), None),
+            text_align='center'
+        ).with_start(start_time).with_end(end_time)
+        
+        clips.append(underline)
+    
+    # Combine all underline clips
+    progress_clip = CompositeVideoClip(clips).with_duration(duration)
+    return progress_clip
 
 def create_video_clips(image_files: List[str], audio_files: List[str], 
                       text_chunks: List[str], video_size: Tuple[int, int]) -> List[CompositeVideoClip]:
     """Create video clips with audio and effects"""
     clips = []
+    processed_clips = []
     
     # Validate input lengths match
     if not (len(image_files) == len(audio_files) == len(text_chunks)):
@@ -81,11 +112,17 @@ def create_video_clips(image_files: List[str], audio_files: List[str],
             # Create clips
             background_clip = ImageClip(img_resized_path).with_duration(duration)
             txt_clip = create_text_clip(text_chunk, video_size, duration)
+            progress_clip = create_progress_indicator(text_chunk, video_size, duration)
             txt_clip = txt_clip.with_position('center')
             
-            composite_clip = CompositeVideoClip([background_clip, txt_clip])
+            # make the text and progress indicator transparent
+            masked_text = vfx.MaskColor(color=[0,0,0]).apply(txt_clip)
+            masked_progress = vfx.MaskColor(color=[0,0,0]).apply(progress_clip)
+            
+            # Compose clips directly without masking
+            composite_clip = CompositeVideoClip([background_clip, masked_text, masked_progress])
             composite_clip = composite_clip.with_audio(audio_clip)
-            clips.append(composite_clip)
+            processed_clips.append(composite_clip)
 
         except Exception as e:
             print(f"Error creating clip {i}: {str(e)}")
@@ -101,4 +138,4 @@ def create_video_clips(image_files: List[str], audio_files: List[str],
                 except Exception as e:
                     print(f"Error cleaning up resized image: {str(e)}")
 
-    return clips
+    return processed_clips
