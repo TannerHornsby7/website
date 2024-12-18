@@ -1,5 +1,8 @@
 'use client';
 
+// debugging tool for IntersectionObserver
+// import "intersection-observer-debugger"
+
 import { useEffect } from "react";
 import portfolioData from "@/data/portfolio.json";
 import FloatingNav from "@/app/components/FloatingNav";
@@ -13,6 +16,7 @@ function setUpSectionObserver() {
     (entries) => {
       const visibleEntries = entries.filter(entry => entry.isIntersecting);
       if (!visibleEntries.length) return;
+      console.log(visibleEntries);
 
       const topSection = visibleEntries.reduce((top, current) => {
         const topIndex = sections.indexOf(top.target.id);
@@ -29,7 +33,7 @@ function setUpSectionObserver() {
     {
       root: null,
       rootMargin: '0px',
-      threshold: [0.5, 0.9, 1]
+      threshold: [0.5, .9]
     }
   );
 

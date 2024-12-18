@@ -31,7 +31,7 @@ export default function Header() {
           Portfolio
         </Link>
         <Link 
-          href="/posts" 
+          href="/under-construction" 
           className={`transition-colors hover:text-gray-900 ${isActive('/posts')}`}
         >
           Posts

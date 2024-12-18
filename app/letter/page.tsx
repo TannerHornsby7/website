@@ -1,5 +1,16 @@
-import UnderConstruction from '@/app/under-construction';
+'use client';
 
-export default function Letter() {
-  return <UnderConstruction />;
-}
+import { useEffect } from 'react';
+import { useRouter } from 'next/navigation';
+
+const LetterPage = () => {
+  const router = useRouter();
+
+  useEffect(() => {
+    router.push('/under-construction');
+  }, [router]);
+
+  return null;
+};
+
+export default LetterPage;

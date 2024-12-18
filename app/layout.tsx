@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 import Header from "./components/Header";
-import Provider from "./provider";
 import OptimizationBackground from "./components/OptimizationBackground";
 
 const geistSans = localFont({
@@ -29,7 +28,6 @@ export default function RootLayout({
 
   return (
     <html lang="en">
-      <Provider>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased bg-tan text-gray-800 p-8 relative overflow-x-hidden`}
       >
@@ -39,7 +37,6 @@ export default function RootLayout({
           {children}
         </main>
       </body>
-      </Provider>
     </html>
   );
 }
