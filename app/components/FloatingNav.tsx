@@ -7,25 +7,23 @@ const sections = ['education', 'work', 'projects', 'skills'];
 
 export default function FloatingNav() {
   const [isVisible, setIsVisible] = useState(false);
-  const [activeSection, setActiveSection] = useState(
-    window.location.hash.slice(1) ? window.location.hash.slice(1) : 'education'
-  );
+  const [activeSection, setActiveSection] = useState('education');
 
   useEffect(() => {
     const timer = setTimeout(() => setIsVisible(true), 750);
-    return () => clearTimeout(timer);
-  }, []);
-
-  useEffect(() => {
     const handleHashChange = () => {
       const newSection = window.location.hash.slice(1);
       if (sections.includes(newSection)) {
         setActiveSection(newSection);
       }
     };
-    if (window === undefined) return;
+    
+
     window.addEventListener('hashchange', handleHashChange);
-    return () => window.removeEventListener('hashchange', handleHashChange);
+    return () => {
+      window.removeEventListener('hashchange', handleHashChange);
+      clearTimeout(timer);
+    };
   }, []);
 
   return (
@@ -35,7 +33,6 @@ export default function FloatingNav() {
           key={section}
           href={`#${section}`}
           onClick={(e) => {
-            if (window === undefined) return;
             e.preventDefault();
             const element = document.getElementById(section);
             if (element) {

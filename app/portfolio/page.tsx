@@ -6,7 +6,6 @@ import FloatingNav from "@/app/components/FloatingNav";
 const sections = ['education', 'work', 'projects', 'skills'];
 
 function setUpSectionObserver() {
-  if (typeof window === 'undefined') return;
   
   let lastSection = '';
   
@@ -44,8 +43,6 @@ function setUpSectionObserver() {
 
 export default function Portfolio() {
   useEffect(() => {
-    if (typeof window === 'undefined') return;
-
     const hash = window.location.hash.slice(1);
     if (hash) {
       if (hash === 'education') {

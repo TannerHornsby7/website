@@ -106,10 +106,7 @@ const generateGradientPath = (width: number, height: number, x: number = (Math.r
 };
 
 export default function OptimizationBackground() {
-  const [dimensions, setDimensions] = useState({
-    width: window.innerWidth,
-    height: window.innerHeight,
-  });
+  const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
   const [surface, setSurface] = useState<Point[][]>([]);
   const [path, setPath] = useState<Point[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -117,7 +114,6 @@ export default function OptimizationBackground() {
 
   // Update dimensions on resize
   useEffect(() => {
-    if (window === undefined) return;
     const updateDimensions = () => {
       setDimensions({
         width: window.innerWidth,
@@ -142,20 +138,18 @@ export default function OptimizationBackground() {
         generateGradientPath(dimensions.width, dimensions.height, e.pageX, e.pageY)
     })
     }
-  }, []);
+  }, [dimensions.height, dimensions.width]);
 
   // Generate surface and gradient path
   useEffect(() => {
-    if (window === undefined) return;
     if (!dimensions.width || !dimensions.height) return;
 
     setSurface(generateSurface(dimensions.width, dimensions.height));
     setPath(generateGradientPath(dimensions.width, dimensions.height));
-  }, [dimensions]);
+  }, [dimensions.width, dimensions.height]);
 
   // Animate gradient descent
   useEffect(() => {
-    if (window === undefined) return;
     if (path.length === 0) return;
 
     const interval = setInterval(() => {
