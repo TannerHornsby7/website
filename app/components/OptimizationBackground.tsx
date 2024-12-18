@@ -1,6 +1,6 @@
 'use client';
 
-import { motion, None } from "framer-motion";
+import { motion } from "framer-motion";
 import { useEffect, useState, useMemo } from "react";
 
 interface Point {
@@ -14,7 +14,7 @@ const GRID_SIZE = 30; // Surface resolution
 const LEARNING_RATE = 0.2; // Gradient descent step size
 const CONVERGENCE_THRESHOLD = 0.0001; // Threshold to stop descent
 const CELEBRATION_DELAY = 2000; // 2 second delay at convergence
-const BALL_FADE_OUT_DURATION = 10000; // Duration of fade out
+const SIZE = .45;
 
 // Convex objective function (bowl with slight ripples)
 const objectiveFunction = (x: number, y: number): number =>
@@ -38,7 +38,7 @@ const project3DTo2D = (x: number, y: number, z: number) => ({
 
 // Generate the surface mesh
 const generateSurface = (width: number, height: number) => {
-  const scale = Math.min(width, height) * 0.45;
+  const scale = Math.min(width, height) * SIZE;
   const halfGrid = GRID_SIZE / 2;
   const gridStep = 5 / GRID_SIZE;
 
@@ -59,7 +59,7 @@ const generateSurface = (width: number, height: number) => {
 
 // Generate a gradient descent path
 const generateGradientPath = (width: number, height: number, x: number = (Math.random() - 0.5) * 4, y: number = (Math.random() - 0.5) * 4): Point[] => {
-  const scale = Math.min(width, height) * 0.45;
+  const scale = Math.min(width, height) * SIZE;
   const path: Point[] = [];
   const visited = new Set<string>();
 
@@ -117,6 +117,7 @@ export default function OptimizationBackground() {
 
   // Update dimensions on resize
   useEffect(() => {
+    if (window === undefined) return;
     const updateDimensions = () => {
       setDimensions({
         width: window.innerWidth,
@@ -145,6 +146,7 @@ export default function OptimizationBackground() {
 
   // Generate surface and gradient path
   useEffect(() => {
+    if (window === undefined) return;
     if (!dimensions.width || !dimensions.height) return;
 
     setSurface(generateSurface(dimensions.width, dimensions.height));
@@ -153,6 +155,7 @@ export default function OptimizationBackground() {
 
   // Animate gradient descent
   useEffect(() => {
+    if (window === undefined) return;
     if (path.length === 0) return;
 
     const interval = setInterval(() => {

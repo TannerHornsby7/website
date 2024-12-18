@@ -6,4 +6,4 @@ export default function NotFound() {
         <p className="mt-8 text-base">Please try navigating back to the homepage or check the links above.</p>
     </div>
   );
-} 
+}
