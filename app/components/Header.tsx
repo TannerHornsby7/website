@@ -30,12 +30,12 @@ export default function Header() {
         >
           Portfolio
         </Link>
-        <Link 
-          href="/under-construction" 
+        <a 
+          href="//blog.tannerhornsby.com" 
           className={`transition-colors hover:text-gray-900 ${isActive('/posts')}`}
         >
           Posts
-        </Link>
+        </a>
         <Link 
           href="/letter" 
           className={`transition-colors hover:text-gray-900 ${isActive('/letter')}`}
