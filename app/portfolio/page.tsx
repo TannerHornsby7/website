@@ -1,5 +1,33 @@
 'use client';
 
+/*
+Taking a break from this for now, but current goal is to implement as follows:
+- initialize an array of visisbility states representing if the section intersects the viewbox currently or not
+- use the intersectionobserver to update this state as we notice changes in intersections
+- decompose the array into a list of visible sections
+- use scroll direction to decide whether we should use the first or last of these sections
+- update the hash to reflect the current section
+
+What is going wrong rn:
+- could be an issue with initialization or the observer itself, but
+  education and work are always set to visible even when they aren't
+
+How can we practice debugging best practices to get a fix on this?
+- determine where to add breakpoints
+- decompose into smaller functions
+-use the intersection-observer-debugger for visual guide to intersection firing
+
+What did i do to fix this?
+- added breakpoints to the observer callback
+- noticed that the array of visibilities was not updating correctly, we were continuously using the initial (empty) state
+- definitely want a more satifying answer as to why this was occurring (same thing was happening with prevY)
+   - apparently its because how i used setState! i was using the previous state to update the new state, but the previous state was always the initial state
+   - instead, i should have used the functional form of setState which is setState(prevState => newState)
+- for now, i am maintaining the visibility list and prev y as global variables, but i should probably move them into a ref
+  later...
+*/
+
+
 // debugging tool for IntersectionObserver
 // import "intersection-observer-debugger"
 
@@ -8,37 +36,55 @@ import portfolioData from "@/data/portfolio.json";
 import FloatingNav from "@/app/components/FloatingNav";
 const sections = ['education', 'work', 'projects', 'skills'];
 
-function setUpSectionObserver() {
-  
-  let lastSection = '';
-  
-  const observer = new IntersectionObserver(
-    (entries) => {
-      const visibleEntries = entries.filter(entry => entry.isIntersecting);
-      if (!visibleEntries.length) return;
-      console.log(visibleEntries);
+let prevY = 0;
+let sectionVisibilities : { [key: string]: boolean } = {
+  education: false,
+  work: false,
+  projects: false,
+  skills: false
+};
 
-      const topSection = visibleEntries.reduce((top, current) => {
-        const topIndex = sections.indexOf(top.target.id);
-        const currentIndex = sections.indexOf(current.target.id);
-        return currentIndex < topIndex ? current : top;
+
+function setUpSectionObserver() {
+
+  const observer = new IntersectionObserver(    
+    (entries) => {
+      // toggle visibility of sections by flipping each of the entries within the sectionVisibilities object
+      let newVisibilities = { ...sectionVisibilities };
+      entries.forEach(entry => {
+        newVisibilities[entry.target.id] = entry.isIntersecting;
       });
 
-      if (topSection.target.id !== lastSection) {
-        lastSection = topSection.target.id;
-        window.history.replaceState(null, '', `#${topSection.target.id}`);
-        window.dispatchEvent(new HashChangeEvent('hashchange'));
+      console.log("new visibilities are", newVisibilities);
+      sectionVisibilities = newVisibilities;
+
+      // turn newVisibilities into a list of its keys for which the value is true
+      const visibleEntries = Object.entries(newVisibilities).filter(([_, value]) => value).map(([key, _]) => key);
+      console.log(visibleEntries);
+
+      // use current y and previous y to determine if the user is scrolling up or down
+      // if the user is scrolling down, set the hash to the last visible entry
+      // if the user is scrolling up, set the hash to the first visible entry
+      const currentY = window.scrollY;
+      if (currentY > prevY) {
+        window.history.replaceState(null, '', `#${visibleEntries[visibleEntries.length - 1]}`);
+      } else {
+        window.history.replaceState(null, '', `#${visibleEntries[0]}`);
       }
+      prevY = currentY;
+      window.dispatchEvent(new HashChangeEvent('hashchange'));
     },
     {
       root: null,
       rootMargin: '0px',
-      threshold: [0.5, .9]
+      threshold: [0.5]
     }
   );
 
+  // initialize the section visibilities object with the current visibility of each section
   sections.forEach(section => {
     const element = document.getElementById(section);
+    if (!element) return;
     if (element) observer.observe(element);
   });
 
