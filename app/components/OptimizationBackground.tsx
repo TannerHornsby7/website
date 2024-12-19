@@ -214,8 +214,8 @@ export default function OptimizationBackground() {
         {meshElements}
         <motion.circle
           animate={{
-            cx: path[currentIndex]?.x,
-            cy: path[currentIndex]?.y,
+            cx: path[currentIndex] ? path[currentIndex].x : 0,
+            cy: path[currentIndex] ? path[currentIndex].y : 0,
             // opacity: [1, 0],
           }}
           transition={{ 
@@ -228,6 +228,8 @@ export default function OptimizationBackground() {
           }}
           r={8}
           fill="darkgray"
+          cx={path[currentIndex] ? Number(path[currentIndex].x) : 0}
+          cy={path[currentIndex] ? Number(path[currentIndex].y) : 0}
         />
       </svg>
     </div>
