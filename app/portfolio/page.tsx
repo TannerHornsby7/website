@@ -50,17 +50,15 @@ function setUpSectionObserver() {
   const observer = new IntersectionObserver(    
     (entries) => {
       // toggle visibility of sections by flipping each of the entries within the sectionVisibilities object
-      let newVisibilities = { ...sectionVisibilities };
+      const newVisibilities = { ...sectionVisibilities };
       entries.forEach(entry => {
         newVisibilities[entry.target.id] = entry.isIntersecting;
       });
 
-      console.log("new visibilities are", newVisibilities);
       sectionVisibilities = newVisibilities;
 
       // turn newVisibilities into a list of its keys for which the value is true
-      const visibleEntries = Object.entries(newVisibilities).filter(([_, value]) => value).map(([key, _]) => key);
-      console.log(visibleEntries);
+      const visibleEntries = Object.keys(newVisibilities).filter(key => newVisibilities[key]);
 
       // use current y and previous y to determine if the user is scrolling up or down
       // if the user is scrolling down, set the hash to the last visible entry
