@@ -35,10 +35,10 @@
         "tech": ["Next.js", "WebRTC", "TypeScript", "TailwindCSS"]
       },
       {
-        "name": "RISC-V Simulator",
+        "name": "ARMv8 Simulator",
         "date": "2022",
-        "description": "Developed a simulator for the RISC-V architecture, a parallel computing architecture. Implemented a custom memory hierarchy, branch prediction, and cache coherence protocol.",
-        "tech": ["C", "RISC-V", "Git"]
+        "description": "Developed an instruction-level simulator for a subset of the ARMv8 instruction set (a RISC style ISA). Added out of order pipelined execution, an LRU L1 cache and write through L2 cache for faster memory operations, and branch prediction using 2 tier branch history table with the 2-bit saturating counter heuristic. ",
+        "tech": ["C", "RISC", "ARMv8", "Git"]
       },
       {
         "name": "CrustyDB",

@@ -5,12 +5,12 @@ export default function Home() {
     <>
         <h1 className="text-4xl font-bold text-gray-900">Tanner Hornsby</h1>
         <p className="text-2xl text-gray-900">Chicago & Dallas</p>
-        <p className="mt-4 text-base">The world is probably better with you in it</p>
+        {/* <p className="mt-4 text-base">The world is probably better with you in it</p> */}
 
         <section className="mt-8">
           <h2 className="text-base font-semibold">Currently</h2>
           <ul className="list-disc list-inside">
-            <li>Finishing my computer science degree at the University of Chicago</li>
+            <li>Finished my computer science degree at the University of Chicago!</li>
             <li>Building a music sharing platform</li>
             {/* called <a href="https://ouradio.net">ouradio</a> */}
             {/* <li></li> */}
