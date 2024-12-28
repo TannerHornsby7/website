@@ -1,5 +1,11 @@
 'use client';
 
+/*
+TODO:
+- blog css overrides core site css which we should fix
+- add header as a component in the blog and hydrate it with said header with custom emitter plugin
+*/
+
 export default function Home() {
   return (
     <>
