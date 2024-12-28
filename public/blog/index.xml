@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0">
+    <channel>
+      <title>Tanner&#039;s Blog</title>
+      <link>https://tannerhornsby.com</link>
+      <description>Last 10 notes on Tanner&#039;s Blog</description>
+      <generator>Quartz -- quartz.jzhao.xyz</generator>
+      <item>
+    <title>Blog</title>
+    <link>https://tannerhornsby.com/</link>
+    <guid>https://tannerhornsby.com/</guid>
+    <description>Hello World this is a test of the blog with some inline styles \forall the homies. Along with some multiline styles \sum \text{thin like this}.</description>
+    <pubDate>Sat, 28 Dec 2024 17:00:52 GMT</pubDate>
+  </item><item>
+    <title>test2</title>
+    <link>https://tannerhornsby.com/folder2/test2</link>
+    <guid>https://tannerhornsby.com/folder2/test2</guid>
+    <description></description>
+    <pubDate>Sat, 28 Dec 2024 17:00:21 GMT</pubDate>
+  </item><item>
+    <title>test1</title>
+    <link>https://tannerhornsby.com/folder1/test1</link>
+    <guid>https://tannerhornsby.com/folder1/test1</guid>
+    <description>link back to home and to test2 test2.</description>
+    <pubDate>Sat, 28 Dec 2024 17:00:04 GMT</pubDate>
+  </item>
+    </channel>
+  </rss>

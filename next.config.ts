@@ -6,6 +6,14 @@ const nextConfig: NextConfig = {
     images: {
         unoptimized: true,
     },
+    async rewrites() {
+        return [
+          {
+            source: '/blog',
+            destination: '/blog/index.html',
+          },
+        ];
+      },
 };
 
 
