@@ -32,7 +32,7 @@ export default function Header() {
         </Link>
         <a 
           href="https://tannerhornsby.com/blog/index.html" 
-          className={`transition-colors hover:text-gray-900 ${isActive('/posts')}`}
+          className={`transition-colors hover:text-gray-900 ${isActive('/blog')}`}
         >
           Posts
         </a>
