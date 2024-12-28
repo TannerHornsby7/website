@@ -31,7 +31,7 @@ export default function Header() {
           Portfolio
         </Link>
         <a 
-          href="//blog.tannerhornsby.com" 
+          href="https://tannerhornsby.com/blog/index.html" 
           className={`transition-colors hover:text-gray-900 ${isActive('/posts')}`}
         >
           Posts
