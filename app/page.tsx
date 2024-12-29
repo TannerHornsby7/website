@@ -4,6 +4,7 @@
 TODO:
 - blog css overrides core site css which we should fix
 - add header as a component in the blog and hydrate it with said header with custom emitter plugin
+- add theming to the site s.t. we match with blog theme
 */
 
 export default function Home() {

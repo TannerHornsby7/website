@@ -117,10 +117,10 @@ export default function TuringMachine({ initialCode = '' }: TuringMachineProps) 
   }
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-4 font-body">
       <div className="flex gap-4 items-center flex-wrap">
         <button
-          className="px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded-lg flex items-center gap-2 transition-colors"
+          className="px-4 py-2 bg-tertiary hover:bg-opacity-80 text-light rounded-lg flex items-center gap-2 transition-colors"
           onClick={() => setIsRunning(!isRunning)}
           disabled={machineState === 'accept' || machineState === 'reject'}
           title={isRunning ? "Stop" : "Run"}
@@ -129,7 +129,7 @@ export default function TuringMachine({ initialCode = '' }: TuringMachineProps) 
           <span className="sr-only">{isRunning ? 'Stop' : 'Run'}</span>
         </button>
         <button
-          className="px-4 py-2 bg-gray-200 hover:bg-gray-300 rounded-lg flex items-center gap-2 transition-colors"
+          className="px-4 py-2 bg-lightgray hover:bg-opacity-80 text-darkgray rounded-lg flex items-center gap-2 transition-colors"
           onClick={step}
           disabled={isRunning || machineState === 'accept' || machineState === 'reject'}
           title="Step"
@@ -190,7 +190,9 @@ export default function TuringMachine({ initialCode = '' }: TuringMachineProps) 
           <motion.div
             key={i}
             className={`flex-shrink-0 w-10 h-10 flex items-center justify-center border ${
-              i === head ? 'border-blue-500 bg-blue-50' : 'border-gray-200'
+              i === head 
+                ? 'border-tertiary bg-tertiary bg-opacity-20' 
+                : 'border-lightgray'
             }`}
             initial={false}
             animate={i === head ? { scale: 1.1 } : { scale: 1 }}
@@ -203,7 +205,7 @@ export default function TuringMachine({ initialCode = '' }: TuringMachineProps) 
               value={symbol}
               onChange={() => {}}
               onKeyDown={(e) => handleCellKeyDown(e, i)}
-              className="w-6 h-6 text-center bg-transparent focus:outline-none"
+              className="w-6 h-6 text-center bg-transparent focus:outline-none text-dark"
               maxLength={1}
               disabled={isRunning}
             />
@@ -217,12 +219,8 @@ export default function TuringMachine({ initialCode = '' }: TuringMachineProps) 
           setCode(e.target.value);
           setMachineState('idle');
         }}
-        className="w-full h-48 font-mono p-4 bg-gray-900 text-green-400 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
+        className="w-full h-48 font-code p-4 bg-lightgray text-tertiary rounded-lg focus:outline-none focus:ring-2 focus:ring-tertiary"
         placeholder="Write your Turing machine program here..."
-        style={{
-          caretColor: '#4ade80',
-          textShadow: '0 0 5px rgba(74, 222, 128, 0.5)'
-        }}
       />
     </div>
   );

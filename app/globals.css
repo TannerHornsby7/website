@@ -2,40 +2,42 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Smooth scrolling */
-html {
-  scroll-behavior: smooth;
-}
-
-/* Fade in animation for main content */
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-main {
-  animation: fadeIn 0.5s ease-out;
-}
-
-/* Subtle hover effects for interactive elements */
-a, button {
-  transition: all 0.2s ease-in-out;
-}
-
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@media (prefers-color-scheme: dark) {
+@layer base {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --color-light: #f5deb2;
+    --color-lightgray: #2b2b2b;
+    --color-gray: #b8b8b8;
+    --color-darkgray: #4e4e4e;
+    --color-dark: #6c6c6d;
+    --color-secondary: #161618;
+    --color-tertiary: #84a59d;
+    --color-highlight: rgba(143, 159, 169, 0.15);
+    --color-text-highlight: #fff23688;
+  }
+
+  [saved-theme="dark"] {
+    --color-light: #161618;
+    --color-lightgray: #393639;
+    --color-gray: #646464;
+    --color-darkgray: #d4d4d4;
+    --color-dark: #f5deb2;
+    --color-secondary: #f5deb2;
+    --color-tertiary: #84a59d;
+    --color-highlight: rgba(143, 159, 169, 0.15);
+    --color-text-highlight: #b3aa0288;
   }
 }
 
 body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  @apply bg-light text-dark transition-colors duration-200;
 }
+
+h1, h2, h3, h4, h5, h6 {
+  @apply font-header;
+}
+
+code {
+  @apply font-code;
+}
+
+/* Add any other global styles here */

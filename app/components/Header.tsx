@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import Darkmode from "./Darkmode";
 
 export default function Header() {
   const pathname = usePathname();
@@ -42,6 +43,7 @@ export default function Header() {
         >
           Letter
         </Link>
+        <Darkmode />
       </nav>
     </header>
   );

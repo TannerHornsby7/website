@@ -96,38 +96,39 @@ export default function CodeEditor({ code, language, description }: CodeEditorPr
   }, [language, value, executeJavaScript]);
 
   return (
-    <div className="space-y-4">
-      <p className="text-gray-600">{description}</p>
+    <div className="space-y-4 font-body">
+      <p className="text-darkgray">{description}</p>
       
       <div className="flex gap-4">
         <div className="flex-1">
           <textarea
             value={value}
             onChange={(e) => setValue(e.target.value)}
-            className="w-full h-48 font-mono p-4 bg-gray-100 rounded-lg"
+            className="w-full h-48 font-code p-4 bg-lightgray text-darkgray rounded-lg focus:outline-none focus:ring-2 focus:ring-tertiary"
             placeholder={`Write your ${language.toUpperCase()} code here...`}
             spellCheck="false"
             data-testid="code-editor"
           />
           {error && (
-            <p className="text-red-500 mt-2" data-testid="error-message">
+            <p className="text-red-500 mt-2 font-code" data-testid="error-message">
               {error}
             </p>
           )}
         </div>
         
         {output && (
-          <div className="flex-1 h-48 border rounded-lg p-4 overflow-auto bg-white">
+          <div className="flex-1 h-48 border border-lightgray rounded-lg p-4 overflow-auto bg-light">
             <div 
               dangerouslySetInnerHTML={{ __html: output }}
               data-testid="output-preview"
+              className="text-dark"
             />
           </div>
         )}
       </div>
 
       <motion.button
-        className="px-4 py-2 bg-blue-500 text-white rounded-lg"
+        className="px-4 py-2 bg-tertiary hover:bg-opacity-80 text-light rounded-lg transition-colors"
         onClick={runCode}
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}

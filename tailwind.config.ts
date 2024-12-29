@@ -1,6 +1,6 @@
 import type { Config } from "tailwindcss";
 
-export default {
+const config: Config = {
   content: [
     "./pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
@@ -8,15 +8,25 @@ export default {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        header: ["Schibsted Grotesk", "sans-serif"],
+        body: ["var(--font-geist-sans)"],
+        code: ["IBM Plex Mono", "monospace"],
+      },
       colors: {
-        background: "var(--background)",
-        foreground: "var(--foreground)",
-        tan: "#F5DEB3",
-        gray: {
-          800: "#4F4F4F",
-          900: "#2F2F2F",
-        },
+        light: "var(--color-light)",
+        lightgray: "var(--color-lightgray)",
+        gray: "var(--color-gray)",
+        darkgray: "var(--color-darkgray)",
+        dark: "var(--color-dark)",
+        secondary: "var(--color-secondary)",
+        tertiary: "var(--color-tertiary)",
+        highlight: "var(--color-highlight)",
+        "text-highlight": "var(--color-text-highlight)",
       },
     },
   },
-} satisfies Config;
+  darkMode: ["class", '[saved-theme="dark"]'],
+};
+
+export default config;

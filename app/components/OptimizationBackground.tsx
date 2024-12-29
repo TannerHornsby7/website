@@ -127,9 +127,6 @@ export default function OptimizationBackground() {
       setCelebrating(false);
       setPath([])
       setPath(generateGradientPath(dimensions.width, dimensions.height, (e.pageX / dimensions.width - 0.5) * 4, (e.pageY / dimensions.height - 0.5) * 4))
-      console.log("click drop")
-      console.log(e.pageX, e.pageY)
-      console.log(dimensions.width, dimensions.height)
   })
     return () => {
       window.removeEventListener("resize", updateDimensions);
@@ -185,8 +182,9 @@ export default function OptimizationBackground() {
                   y1={point.y}
                   x2={next.x}
                   y2={next.y}
-                  stroke="lightgray"
+                  stroke="var(--color-lightgray)"
                   strokeWidth="0.5"
+                  opacity={0.3}
                 />
               )}
               {below && (
@@ -195,8 +193,9 @@ export default function OptimizationBackground() {
                   y1={point.y}
                   x2={below.x}
                   y2={below.y}
-                  stroke="lightgray"
+                  stroke="var(--color-lightgray)"
                   strokeWidth="0.5"
+                  opacity={0.3}
                 />
               )}
             </g>
@@ -216,18 +215,14 @@ export default function OptimizationBackground() {
           animate={{
             cx: path[currentIndex] ? path[currentIndex].x : 0,
             cy: path[currentIndex] ? path[currentIndex].y : 0,
-            // opacity: [1, 0],
           }}
           transition={{ 
             duration: ANIMATION_DURATION,
             ease: "linear",
-            // opacity: {
-            //   duration: BALL_FADE_OUT_DURATION / 1000, // Convert ms to seconds
-            //   ease: "easeInOut"
-            // }
           }}
           r={8}
-          fill="darkgray"
+          fill="var(--color-tertiary)"
+          opacity={0.6}
           cx={path[currentIndex] ? Number(path[currentIndex].x) : 0}
           cy={path[currentIndex] ? Number(path[currentIndex].y) : 0}
         />

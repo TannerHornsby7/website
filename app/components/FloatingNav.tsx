@@ -45,7 +45,7 @@ export default function FloatingNav() {
             // might have to set active sectoin here for safari because their observer is buggy
           }}
           className={`text-xs text-center font-bold rotate-270 cursor-pointer tracking-wide ${
-            activeSection === section ? 'text-gray-900 font-extrabold' : 'text-gray-400'
+            activeSection === section ? 'text-darkgray font-extrabold' : 'text-gray-400'
           }`}
           initial={{ opacity: 0, x: -200 }}
           animate={{ opacity: isVisible ? 1 : 0, x: isVisible ? 0 : -200, rotate: 270 }}
