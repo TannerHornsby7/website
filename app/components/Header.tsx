@@ -17,7 +17,7 @@ export default function Header() {
       <Link href="/">
         <Image
           priority
-          src="/ascii-art.png"
+          src="/ascii-art.webp"
           alt="Profile Picture"
           width={50}
           height={50}
@@ -32,7 +32,7 @@ export default function Header() {
           Portfolio
         </Link>
         <a 
-          href="https://tannerhornsby.com/blog/index.html" 
+          href="https://blog.tannerhornsby.com" 
           className={`transition-colors hover:text-gray-900 ${isActive('/blog')}`}
         >
           Posts
