@@ -7,7 +7,7 @@ const Darkmode = () => {
 
   return (
     <button 
-      className="cursor-pointer p-0 relative bg-transparent border-none w-5 h-5 mx-2.5 text-inherit"
+      className="cursor-pointer p-0 relative bg-transparent border-none w-5 h-5 text-inherit"
       onClick={toggleTheme}
       aria-label={`Toggle ${theme === 'dark' ? 'Light' : 'Dark'} Mode`}
     >

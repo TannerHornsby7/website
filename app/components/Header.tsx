@@ -24,7 +24,7 @@ export default function Header() {
           className="rounded-full transition-transform hover:scale-105"
         />
       </Link>
-      <nav className="flex gap-8">
+      <nav className="flex justify-end gap-4">
         <Link 
           href="/portfolio" 
           className={`transition-colors hover:text-gray-900 ${isActive('/portfolio')}`}
